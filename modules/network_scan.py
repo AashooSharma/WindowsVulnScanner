@@ -1,7 +1,7 @@
 # network_scan.py
 import os
 import socket
-from port_scan import scan_ports  # Import from our previous module
+from .port_scan import scan_ports  # Import from our previous module
 
 def ping_device(ip):
     """

@@ -3,24 +3,34 @@ import subprocess
 
 def get_user_accounts():
     """
-    Returns a list of Windows user accounts
+    Returns a clean list of Windows user accounts
     """
     try:
-        output = subprocess.check_output("net user", shell=True, stderr=subprocess.DEVNULL)
-        output = output.decode().splitlines()
+        output = subprocess.check_output("net user", shell=True, text=True, stderr=subprocess.DEVNULL)
         users = []
 
-        # Windows 'net user' output parsing
+        # Parse 'net user' output
         capture = False
-        for line in output:
+        for line in output.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+
+            # Start capturing after dashes
             if "----" in line:
                 capture = not capture
                 continue
+
             if capture:
-                # Split line by spaces and filter empty strings
-                users += [u for u in line.split(" ") if u]
+                # Skip footer line
+                if "The command completed successfully" in line:
+                    continue
+
+                # Split by spaces and filter blanks
+                users.extend([u for u in line.split() if u])
 
         return users
+
     except Exception as e:
         print("Error fetching users:", e)
         return []
