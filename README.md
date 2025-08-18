@@ -71,10 +71,13 @@ python main.py
 (Optional GUI)
 
 ```bash
-python gui/dashboard.py
+python app.py
 ```
 
 ---
+
+## Preview
+![home](./home.png)
 
 ## 🚀 Usage
 
