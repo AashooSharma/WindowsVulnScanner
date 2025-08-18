@@ -1,0 +1,144 @@
+/* ================== Sci-Fi Dark Theme ================== */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Headings & Card Headers */
+h1, h2, .card-header {
+    color: #00ffea; /* Neon accent */
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+}
+
+/* Container */
+.container {
+    padding-top: 50px;
+}
+
+/* Card Styling */
+.card {
+    background-color: #1f2833;
+    border: 1px solid #00ffea;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 20px #00ffea40;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 35px #00ffea80;
+}
+
+/* List Items inside Cards */
+.list-group-item {
+    background-color: #1f2833;
+    color: #c5c6c7;
+    border: 1px solid #00ffea30;
+    transition: all 0.3s;
+}
+
+.list-group-item strong {
+    color: #00ffea;
+}
+
+/* Special Text Highlights */
+span.user-all { color: #00ffea; }   /* All users - neon cyan */
+span.user-weak { color: #ff0066; }  /* Weak users - neon pink */
+span.update { color: #ffb400; }     /* Installed updates - neon orange */
+span.ports { color: #00ffea; }      /* Open ports - neon cyan */
+
+/* Progress Bar */
+.progress {
+    height: 25px;
+    background-color: #1f2833;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #00ffea30 inset;
+}
+
+.progress-bar {
+    background-color: #00ffea;
+    font-weight: bold;
+    color: #0b0c10;
+    text-align: center;
+}
+
+/* Buttons */
+a.btn {
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px #00ffea40;
+}
+
+a.btn-primary { background-color: #00ffea; border: none; color: #0b0c10; }
+a.btn-primary:hover { background-color: #00bfa5; box-shadow: 0 0 25px #00ffea; }
+
+a.btn-outline-primary { color: #00ffea; border-color: #00ffea; }
+a.btn-outline-primary:hover { background-color: #00ffea10; box-shadow: 0 0 15px #00ffea; color: #0b0c10; }
+
+a.btn-outline-danger { color: #ff0066; border-color: #ff0066; }
+a.btn-outline-danger:hover { background-color: #ff006610; box-shadow: 0 0 15px #ff0066; color: #0b0c10; }
+
+a.btn-secondary { background-color: #0b0c10; border: 1px solid #00ffea; color: #00ffea; }
+a.btn-secondary:hover { background-color: #00ffea; color: #0b0c10; box-shadow: 0 0 15px #00ffea; }
+
+/* Table Styling */
+table {
+    color: #c5c6c7;
+    background-color: #1f2833;
+    border: 1px solid #00ffea;
+    border-radius: 10px;
+}
+
+table th {
+    color: #00ffea;
+    text-shadow: 0 0 5px #00ffea;
+}
+
+table td {
+    color: #c5c6c7;
+}
+
+.table tbody tr:hover {
+    background-color: #00ffea20;
+}
+
+.table-responsive {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #00ffea50;
+    border-radius: 10px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: #00ffea55; border-radius: 5px; }
+::-webkit-scrollbar-track { background: #1f2833; }
+
+/* Flicker Animation */
+.flicker { animation: flicker 1.5s infinite; }
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 24%, 55% { opacity: 0.4; }
+}
+.text-neon-orange {
+    color: #ffb400; /* Neon orange */
+    text-shadow: 0 0 5px #ffb400, 0 0 10px #ffb400;
+}
+.text-neon-cyan {
+    color: #00ffea; /* Neon cyan */
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+}
+
+.text-neon-pink {
+    color: #ff0066; /* Neon pink */
+    text-shadow: 0 0 5px #ff0066, 0 0 10px #ff0066;
+}

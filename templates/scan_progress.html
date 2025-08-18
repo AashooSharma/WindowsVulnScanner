@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Progress</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================== BODY ================== */
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ================== HEADING ================== */
+        h1 {
+            color: #00ffea;
+            text-shadow: 0 0 5px #00ffea, 0 0 20px #00ffea;
+            animation: flicker 1.5s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 22%, 24%, 55% { opacity: 0.4; }
+        }
+
+        /* ================== TERMINAL OUTPUT ================== */
+        #terminal {
+            background-color: #1f2833;
+            border: 1px solid #00ffea30;
+            border-radius: 10px;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            box-shadow: 0 0 20px #00ffea30 inset;
+        }
+
+        #terminal p {
+            margin: 0 0 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output {
+            color: #00ffea;
+        }
+
+        .command {
+            color: #ffb400;
+        }
+
+        /* ================== PROGRESS BAR ================== */
+        .progress {
+            height: 30px;
+            background-color: #1f2833;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #00ffea30 inset;
+        }
+
+        .progress-bar {
+            background-color: #00ffea;
+            font-weight: bold;
+            color: #0b0c10;
+            text-align: center;
+        }
+
+        /* ================== BUTTON ================== */
+        .btn-success {
+            background-color: #00ffea;
+            border: none;
+            color: #0b0c10;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 12px 40px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px #00ffea80, 0 0 60px #00ffea40 inset;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-success:hover {
+            background-color: #00bfa5;
+            box-shadow: 0 0 35px #00ffea, 0 0 80px #00ffea40 inset;
+            color: #0b0c10;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px #00ffea80, 0 0 60px #00ffea40 inset; }
+            50% { box-shadow: 0 0 35px #00ffea, 0 0 100px #00ffea50 inset; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Scan Progress</h1>
+
+        <!-- Terminal Output -->
+        <div id="terminal">
+            <p class="output">Initializing scan...</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress my-3">
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                style="width: 0%">0%</div>
+        </div>
+
+        <!-- View Results Button -->
+        <div class="text-center mt-3" id="resultsLink" style="display:none;">
+            <a id="viewResults" href="#" class="btn btn-success">View Scan Results</a>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            $.get("/scan_status", function (data) {
+                // Update progress bar
+                $("#progressBar").css("width", data.progress + "%");
+                $("#progressBar").text(data.progress + "%");
+
+                // Append terminal output line by line
+                const terminal = $("#terminal");
+                terminal.append(`<p class="command">> ${data.status}</p>`);
+                terminal.scrollTop(terminal[0].scrollHeight);
+
+                if (data.progress < 100) {
+                    setTimeout(updateProgress, 1000);
+                } else {
+                    // Scan complete
+                    $("#viewResults").attr("href", "/show_results");
+                    $("#resultsLink").fadeIn();
+                    terminal.append('<p class="output">Scan completed successfully!</p>');
+                    terminal.scrollTop(terminal[0].scrollHeight);
+                }
+            });
+        }
+
+        // Start updating progress
+        updateProgress();
+    </script>
+</body>
+
+</html>
