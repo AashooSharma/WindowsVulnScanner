@@ -104,5 +104,12 @@ def show_results():
     else:
         return "Scan not finished yet. Please wait..."
 
+from flask import send_from_directory
+
+@app.route('/reports/<path:filename>')
+def download_report(filename):
+    return send_from_directory('reports', filename)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
