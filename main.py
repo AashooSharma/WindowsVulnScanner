@@ -1,5 +1,5 @@
 # main.py
-from modules import system_info, user_accounts, port_scan, updates_check, network_scan, report_generator
+from modules import report_generator, system_info, user_accounts, port_scan, updates_check, network_scan
 from datetime import datetime
 import os
 
