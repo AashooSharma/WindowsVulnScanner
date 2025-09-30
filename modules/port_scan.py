@@ -35,7 +35,9 @@ def scan_ports(target_ip, ports_list=None, timeout=1, max_threads=500):
     Returns a list of tuples (port, service).
     """
     if ports_list is None:
-        ports_list = range(1, 65536)  # All TCP ports
+        ports_list = [21, 22, 23, 25, 53, 80, 110, 143, 443, 3389]  # common ports
+        
+        #ports_list = range(1, 65536)  # All TCP ports
 
     open_ports = []
     with ThreadPoolExecutor(max_threads) as executor:
